@@ -1,9 +1,9 @@
-from app.mysql_connection import mysql_connection
+from mysql_connection import mysql_connection
 
 def get_appointment_details(doctor_id, appointment_date):
     connection = mysql_connection()
     cursor = connection.cursor()
-    query = "select * from appointments_list where doctor_id = %s and appointment_date = '%s'"
+    query = "select * from appointments_list where doctor_id = %s and appointment_date = %s"
     cursor.execute(query, (doctor_id, appointment_date))
     appointment_details = []
     
@@ -36,8 +36,8 @@ def get_all_appointment_details():
 def get_appointment_details_date(date):
     connection = mysql_connection()
     cursor = connection.cursor()
-    query = "select * from appointments_list where appointment_date = '%s'"
-    cursor.execute(query, date)
+    query = "select * from appointments_list where appointment_date = %s"
+    cursor.execute(query, (date,))
     appointment_details = []
     
     for (doctor_id, patient_name, appointment_date) in cursor:
@@ -54,7 +54,7 @@ def get_appointment_details_doctor(doctor_id):
     connection = mysql_connection()
     cursor = connection.cursor()
     query = "select * from appointments_list where doctor_id = %s"
-    cursor.execute(query,(doctor_id))
+    cursor.execute(query, (doctor_id,))
     appointment_details = []
     
     for (doctor_id, patient_name, appointment_date) in cursor:
@@ -79,9 +79,9 @@ def insert_appointment_details(data):
 
 if __name__ == "__main__":
     data = [{
-        "doctor_id": 2,
+        "doctor_id": 3,
         "patient_name": "Nisith", 
-        "appointment_date": "2024-04-26"
+        "appointment_date": "2024-05-02"
     }]
     # insert_appointment_details(data[0])
-    print(get_all_appointment_details())
+    print(get_appointment_details_date("2024-04-26"))

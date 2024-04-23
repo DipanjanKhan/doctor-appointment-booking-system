@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from mysql_connection import mysql_connection
-from app import doctors_dao, schedules_dao, appointment_dao
+import doctors_dao, schedules_dao, appointment_dao
 
 app = Flask(__name__)
 

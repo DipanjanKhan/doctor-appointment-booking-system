@@ -1,4 +1,4 @@
-from app.mysql_connection import mysql_connection
+from mysql_connection import mysql_connection
 
 def get_doctors_list():
     connection = mysql_connection()
@@ -21,7 +21,7 @@ def get_doctor_details(doctor_id):
     cursor = connection.cursor()
     query = "select * from doctors where doctor_id = %s"
     doctor = []
-    cursor.execute(query, doctor_id)
+    cursor.execute(query, (doctor_id,))
     for (doctor_id, doctor_name, address) in cursor:
         doctor.append({
             "doctor_id":doctor_id,

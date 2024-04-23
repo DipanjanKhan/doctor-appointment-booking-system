@@ -1,11 +1,11 @@
-from app.mysql_connection import mysql_connection
+from mysql_connection import mysql_connection
 
 def get_schedule(doctor_id):
     connection = mysql_connection()
     cursor = connection.cursor()
     schedules = []
     query_schedule = "select schedule_day, schedule_time from doctors_schedules where doctor_id = %s"
-    cursor.execute(query_schedule, doctor_id)
+    cursor.execute(query_schedule, (doctor_id,))
     for (schedule_day, schedule_time) in cursor:
         schedule = str(schedule_day) + " " +  str(schedule_time)
         schedules.append(schedule)
