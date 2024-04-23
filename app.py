@@ -57,7 +57,10 @@ def show_all_appointments_date(appointment_date):
 def appointment_book():
     data = request.json
     doctor_id = data["doctor_id"]
+    doctor_details = doctors_dao.get_doctor_details(doctor_id)
     appointment_date = data["appointment_date"]
+    if not doctor_details:
+        return jsonify({"error": "Doctor not found"}), 404
     appointment_details = appointment_dao.get_appointment_details(doctor_id, appointment_date)
     appointment_slots_left = 9 - len(appointment_details)
     data["appointment_slots_left"] = appointment_slots_left
