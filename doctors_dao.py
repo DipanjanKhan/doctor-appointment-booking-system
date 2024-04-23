@@ -1,4 +1,4 @@
-from mysql_connection import mysql_connection
+from app.mysql_connection import mysql_connection
 
 def get_doctors_list():
     connection = mysql_connection()

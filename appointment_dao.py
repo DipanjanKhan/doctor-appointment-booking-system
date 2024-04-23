@@ -1,4 +1,4 @@
-from mysql_connection import mysql_connection
+from app.mysql_connection import mysql_connection
 
 def get_appointment_details(doctor_id, appointment_date):
     connection = mysql_connection()
